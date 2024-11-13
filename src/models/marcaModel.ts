@@ -1,11 +1,11 @@
-// import { UUID } from "crypto"
+import { modelo, Modelo } from "./modeloModel"
 
-// interface Marca {
-//     id : number
-//     nome : string,
-//     modelos: modelo[]
-// }
+interface Marca {
+    id : number
+    nome : string,
+    modelos: Modelo[]
+}
 
-// let marca : Marca [] = []
+let marca : Marca [] = []
 
-// export {Marca, marca}
+export {Marca, marca}

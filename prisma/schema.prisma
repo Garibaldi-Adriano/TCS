@@ -1,99 +1,88 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
 
-// datasource db {
-//   provider = "postgresql"
-//   url      = env("DATABASE_URL")
-// }
 datasource db {
- provider = "sqlite"
- url      = "file:./dev.db"
-}
-
-
-model Veiculo {
-  id                Int                @id @default(autoincrement())
-  placa             String             @unique
-  chassi            String
-  anoFabricacao     DateTime
-  cor               String
-  marca             Marca              @relation(fields: [marcaId], references: [id])
-  marcaId           Int
-  modelo            Modelo             @relation(fields: [modeloId], references: [id])
-  modeloId          Int                
-  status            String
-  manutencao        Manutencao[]
-  ContratoLocacao   ContratoLocacao[]
-}
-
-model ContratoLocacao {
-  id                Int                @id @default(autoincrement())
-  dataLocacao       DateTime
-  dataDevolucao     DateTime
-  valorCaucao       Float
-  valorTotal        Float
-  status            String
-  veiculos          Veiculo[]
-  ocorrencias       Ocorrencia[]
-  pagamento         Pagamento?
-}
-
-model Modelo {
-  id                Int                @id @default(autoincrement())
-  nome              String
-  anoModelo         DateTime
-  qtModelo          Int
-  Veiculo           Veiculo[]
-  marca             Marca              @relation(fields: [marcaId], references: [id])
-  marcaId           Int
-  categoria         Categoria          @relation(fields: [categoriaId], references: [id])
-  categoriaId       Int
-}
-
-model Marca {
-  id                Int                @id @default(autoincrement())
-  nome              String
-  modelos           Modelo[]
-  veiculos          Veiculo[]
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 model Categoria {
-  id                Int                @id @default(autoincrement())
-  tipo              String
-  valorLocacao      Float
-  modelos           Modelo[]
+  id           Int       @id @default(autoincrement())
+  tipo         String
+  valorLocacao Float
+  modelos      Modelo[]
+}
+
+model Marca {
+  id       Int       @id @default(autoincrement())
+  nome     String
+  modelos  Modelo[]
+  veiculos Veiculo[]
+}
+
+model Modelo {
+  id          Int       @id @default(autoincrement())
+  nome        String
+  anoModelo   DateTime
+  qtModelo    Int
+  veiculos    Veiculo[]
+  marca       Marca     @relation(fields: [marcaId], references: [id])
+  marcaId     Int
+  categoria   Categoria @relation(fields: [categoriaId], references: [id])
+  categoriaId Int
+}
+
+model Veiculo {
+  id              Int              @id @default(autoincrement())
+  placa           String           @unique
+  chassi          String
+  anoFabricacao   DateTime
+  cor             String
+  marca           Marca            @relation(fields: [marcaId], references: [id])
+  marcaId         Int
+  modelo          Modelo           @relation(fields: [modeloId], references: [id])
+  modeloId        Int                
+  status          String
+  manutencao      Manutencao[]
+  contratos       ContratoLocacao[]
 }
 
 model Manutencao {
-  id                Int                @id @default(autoincrement())
-  descricao         String
-  dataManutencao    DateTime
-  valorManutencao   Float
-  veiculo           Veiculo            @relation(fields: [veiculoId], references: [id])
-  veiculoId         Int
+  id              Int         @id @default(autoincrement())
+  descricao       String
+  dataManutencao  DateTime
+  valorManutencao Float
+  veiculo         Veiculo     @relation(fields: [veiculoId], references: [id])
+  veiculoId       Int
+}
+
+model ContratoLocacao {
+  id              Int             @id @default(autoincrement())
+  dataLocacao     DateTime
+  dataDevolucao   DateTime
+  valorCaucao     Float
+  valorTotal      Float
+  status          String
+  veiculos        Veiculo[]
+  ocorrencias     Ocorrencia[]
+  pagamento       Pagamento?
 }
 
 model Ocorrencia {
-  id                Int                @id @default(autoincrement())
+  id                Int              @id @default(autoincrement())
   descricao         String
   dataOcorrencia    DateTime
   valorOcorrencia   Float
-  contratoLocacao   ContratoLocacao    @relation(fields: [contratoLocacaoId], references: [id])
+  contratoLocacao   ContratoLocacao  @relation(fields: [contratoLocacaoId], references: [id])
   contratoLocacaoId Int
 }
 
 model Pagamento {
-  id                Int                @id @default(autoincrement())
-  data              DateTime
-  valorPago         Float
-  formaPagamento    String
-  contrato          ContratoLocacao    @relation(fields: [contratoId], references: [id])
-  contratoId        Int                @unique
+  id             Int             @id @default(autoincrement())
+  data           DateTime
+  valorPago      Float
+  formaPagamento String
+  contrato       ContratoLocacao @relation(fields: [contratoId], references: [id])
+  contratoId     Int             @unique
 }
