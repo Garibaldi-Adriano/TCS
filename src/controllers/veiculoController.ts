@@ -59,10 +59,10 @@ export const getVeiculoById = async (req: Request, res: Response) => {
 
 // Criar um novo veículo
 export const createVeiculo = async (req: Request, res: Response) => {
-  const { placa, chassi, anoFabricacao, cor, marcaId, modeloId, status, manutencao } = req.body;
+  const { placa, chassi, anoFabricacao, cor, marcaId, modeloId, status } = req.body;
 
-  if (!placa || !chassi || !anoFabricacao || !cor || !marcaId || !modeloId || !status || !manutencao) {
-    res.status(401).json({ message: "Parametros invalidos. Necessário informar: placa, chassi, anoFabricacao, cor, marca, modelo, status e a manutencao." });
+  if (!placa || !chassi || !anoFabricacao || !cor || !marcaId || !modeloId || !status ) {
+    res.status(401).json({ message: "Parametros invalidos. Necessário informar: placa, chassi, anoFabricacao, cor, marca, modelo e o status." });
   }
 
   try {
@@ -75,9 +75,6 @@ export const createVeiculo = async (req: Request, res: Response) => {
         marcaId,
         modeloId,
         status,
-        manutencao: {
-          create: manutencao,
-        },
       },
     });
     res.status(201).json(veiculo);

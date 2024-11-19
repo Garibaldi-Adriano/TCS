@@ -4,7 +4,7 @@ import { getAllModelos, getModeloById, createModelo, updateModelo, deleteModelo 
 import { getAllCategorias, getCategoriaById, createCategoria, updateCategoria, deleteCategoria } from "../controllers/categoriaController";
 import { getAllVeiculos, getVeiculoById, createVeiculo, updateVeiculo, deleteVeiculo } from "../controllers/veiculoController";
 import { getAllManutencoes, getManutencaoById, createManutencao, updateManutencao, deleteManutencao } from "../controllers/manutencaoController";
-// import { getAllOcorrencias, getOcorrenciaById, createOcorrencia, updateOcorrencia, deleteOcorrencia } from '../controllers/ocorrenciaController';
+import { getAllOcorrencias, getOcorrenciaById, createOcorrencia, updateOcorrencia, deleteOcorrencia } from '../controllers/ocorrenciaController';
 // import { getAllContratoLocacoes, getContratoLocacaoById, createContratoLocacao, updateContratoLocacao, deleteContratoLocacao } from '../controllers/contratoLocacaoController';
 import { getAllPagamentos, getPagamentoById, createPagamento, updatePagamento, deletePagamento } from "../controllers/pagamentoController";
 
@@ -46,11 +46,11 @@ router.put("/manutencoes/:id", updateManutencao);
 router.delete("/manutencoes/:id", deleteManutencao);
 
 //***** OCORRENCIA ******** */
-// router.post('/ocorrencias', createOcorrencia)
-// router.get('/ocorrencias', getAllOcorrencias)
-// router.get('/ocorrencias/:id', getOcorrenciaById)
-// router.put('/ocorrencias/:id',updateOcorrencia)
-// router.delete('/ocorrencias/:id', deleteOcorrencia)
+router.post('/ocorrencias', createOcorrencia)
+router.get('/ocorrencias', getAllOcorrencias)
+router.get('/ocorrencias/:id', getOcorrenciaById)
+router.put('/ocorrencias/:id',updateOcorrencia)
+router.delete('/ocorrencias/:id', deleteOcorrencia)
 
 //***** CONTRATO LOCACAO ******** */
 // router.post('/contratoLocacoes', createContratoLocacao)

@@ -64,7 +64,7 @@ model ContratoLocacao {
   valorCaucao   Float
   valorTotal    Float
   status        String
-  ocorrencias   Ocorrencia[]
+  Ocorrencia    Ocorrencia[]
   pagamento     Pagamento[]
   veiculos      Veiculo[]    @relation("ContratoLocacaoToVeiculo")
 }
@@ -74,8 +74,8 @@ model Ocorrencia {
   descricao         String
   dataOcorrencia    DateTime
   valorOcorrencia   Float
-  contratoLocacaoId Int
-  contratoLocacao   ContratoLocacao @relation(fields: [contratoLocacaoId], references: [id])
+  contratoId        Int
+  contrato          ContratoLocacao @relation(fields: [contratoId], references: [id])
 }
 
 model Pagamento {
