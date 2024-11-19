@@ -99,7 +99,7 @@ export const updateManutencao = async (req: Request, res: Response) => {
         dataManutencao: new Date(dataManutencao),
         valorManutencao,
         veiculo: {
-          upsert: veiculo.map((veiculo: any) => ({
+          upsert: {
             where: { id: veiculo.id },
             update: {
               placa: veiculo.placa,
@@ -109,7 +109,6 @@ export const updateManutencao = async (req: Request, res: Response) => {
               marcaId: veiculo.marcaId,
               modeloId: veiculo.modeloId,
               status: veiculo.status,
-              manutencao: veiculo.manutencao,
             },
             create: {
               placa: veiculo.placa,
@@ -119,9 +118,8 @@ export const updateManutencao = async (req: Request, res: Response) => {
               marcaId: veiculo.marcaId,
               modeloId: veiculo.modeloId,
               status: veiculo.status,
-              manutencao: veiculo.manutencao,
             },
-          })),
+          },
         },
       },
     });
