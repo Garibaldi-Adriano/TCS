@@ -6,7 +6,7 @@ import { getAllVeiculos, getVeiculoById, createVeiculo, updateVeiculo, deleteVei
 import { getAllManutencoes, getManutencaoById, createManutencao, updateManutencao, deleteManutencao } from "../controllers/manutencaoController";
 // import { getAllOcorrencias, getOcorrenciaById, createOcorrencia, updateOcorrencia, deleteOcorrencia } from '../controllers/ocorrenciaController';
 // import { getAllContratoLocacoes, getContratoLocacaoById, createContratoLocacao, updateContratoLocacao, deleteContratoLocacao } from '../controllers/contratoLocacaoController';
-// import { getAllPagamentos, getPagamentoById, createPagamento, updatePagamento, deletePagamento } from '../controllers/pagamentoController';
+import { getAllPagamentos, getPagamentoById, createPagamento, updatePagamento, deletePagamento } from "../controllers/pagamentoController";
 
 const router = Router();
 
@@ -60,10 +60,10 @@ router.delete("/manutencoes/:id", deleteManutencao);
 // router.delete('/contratoLocacoes/:id', deleteContratoLocacao)
 
 //***** PAGAMENTO ******** */
-// router.post('/pagamentos', createPagamento)
-// router.get('/pagamentos', getAllPagamentos)
-// router.get('/pagamentos/:id', getPagamentoById)
-// router.put('/pagamentos/:id',updatePagamento)
-// router.delete('/pagamentos/:id', deletePagamento)
+router.post("/pagamentos", createPagamento);
+router.get("/pagamentos", getAllPagamentos);
+router.get("/pagamentos/:id", getPagamentoById);
+router.put("/pagamentos/:id", updatePagamento);
+router.delete("/pagamentos/:id", deletePagamento);
 
 export default router;
