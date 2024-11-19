@@ -3,7 +3,7 @@ import { getAllMarcas, getMarcaById, createMarca, updateMarca, deleteMarca } fro
 import { getAllModelos, getModeloById, createModelo, updateModelo, deleteModelo } from "../controllers/modeloController";
 import { getAllCategorias, getCategoriaById, createCategoria, updateCategoria, deleteCategoria } from "../controllers/categoriaController";
 import { getAllVeiculos, getVeiculoById, createVeiculo, updateVeiculo, deleteVeiculo } from "../controllers/veiculoController";
-// import { getAllManutencoes, getManutencaoById, createManutencao, updateManutencao, deleteManutencao } from '../controllers/manutencaoController';
+import { getAllManutencoes, getManutencaoById, createManutencao, updateManutencao, deleteManutencao } from "../controllers/manutencaoController";
 // import { getAllOcorrencias, getOcorrenciaById, createOcorrencia, updateOcorrencia, deleteOcorrencia } from '../controllers/ocorrenciaController';
 // import { getAllContratoLocacoes, getContratoLocacaoById, createContratoLocacao, updateContratoLocacao, deleteContratoLocacao } from '../controllers/contratoLocacaoController';
 // import { getAllPagamentos, getPagamentoById, createPagamento, updatePagamento, deletePagamento } from '../controllers/pagamentoController';
@@ -39,11 +39,11 @@ router.put("/veiculos/:id", updateVeiculo);
 router.delete("/veiculos/:id", deleteVeiculo);
 
 //***** MANUTENCAO ******** */
-// router.post('/manutencoes', createManutencao)
-// router.get('/manutencoes', getAllManutencoes)
-// router.get('/manutencoes/:id', getManutencaoById)
-// router.put('/manutencoes/:id',updateManutencao)
-// router.delete('/manutencoes/:id', deleteManutencao)
+router.post("/manutencoes", createManutencao);
+router.get("/manutencoes", getAllManutencoes);
+router.get("/manutencoes/:id", getManutencaoById);
+router.put("/manutencoes/:id", updateManutencao);
+router.delete("/manutencoes/:id", deleteManutencao);
 
 //***** OCORRENCIA ******** */
 // router.post('/ocorrencias', createOcorrencia)
