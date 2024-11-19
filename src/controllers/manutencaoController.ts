@@ -5,7 +5,7 @@ import { ErrorRequest } from "../utils/TratamentoErros";
 const prisma = new PrismaClient();
 
 // Listar todas as manutenções
-export const getAllManutencao = async (req: Request, res: Response) => {
+export const getAllManutencoes = async (req: Request, res: Response) => {
   try {
     const manutencao = await prisma.manutencao.findMany();
     res.status(200).json(manutencao);
