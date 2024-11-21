@@ -60,7 +60,7 @@ export const getMarcaById = async (req: Request, res: Response) => {
 
 // Criar uma nova marca
 export const createMarca = async (req: Request, res: Response) => {
-  const { nome, modelos } = req.body;
+  const { nome } = req.body;
 
   if (!nome) {
     res.status(401).json({ message: "Parametros invalidos. Necessário informar: nome." });
@@ -69,10 +69,7 @@ export const createMarca = async (req: Request, res: Response) => {
   try {
     const marca = await prisma.marca.create({
       data: {
-        nome,
-        modelos: {
-          create: modelos,
-        },
+        nome
       },
     });
     res.status(201).json(marca);
@@ -92,9 +89,9 @@ export const createMarca = async (req: Request, res: Response) => {
 // Atualizar uma marca
 export const updateMarca = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { nome, modelos } = req.body;
+  const { nome } = req.body;
 
-  if (!nome || !modelos) {
+  if (!nome) {
     res.status(401).json({ message: "Parametros invalidos. Necessário informar: nome e modelos." });
   }
 
@@ -102,24 +99,7 @@ export const updateMarca = async (req: Request, res: Response) => {
     const marca = await prisma.marca.update({
       where: { id: Number(id) },
       data: {
-        nome,
-        modelos: {
-          upsert: modelos.map((modelo: any) => ({
-            where: { id: modelo.id },
-            update: {
-              nome: modelo.nome,
-              anoModelo: modelo.anoModelo,
-              qtModelo: modelo.qtModelo,
-              categoriaId: modelo.categoriaId,
-            },
-            create: {
-              nome: modelo.nome,
-              anoModelo: modelo.anoModelo,
-              qtModelo: modelo.qtModelo,
-              categoriaId: modelo.categoriaId,
-            },
-          })),
-        },
+        nome
       },
       include: {
         modelos: true,

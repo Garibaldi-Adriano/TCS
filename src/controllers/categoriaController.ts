@@ -61,7 +61,7 @@ export const createCategoria = async (req: Request, res: Response) => {
   const { tipo, valorLocacao } = req.body;
 
   if (!tipo || !valorLocacao) {
-    res.status(401).json({ message: "Parametros invalidos. Necessário informar o tipo e o valorLocacao." });
+    res.status(401).json({ message: `Parametros invalidos. Necessário informar o "tipo" e o "valorLocacao".` });
   }
 
   try {
@@ -91,7 +91,7 @@ export const updateCategoria = async (req: Request, res: Response) => {
   const { tipo, valorLocacao } = req.body;
 
   if (!tipo || !valorLocacao) {
-    res.status(401).json({ message: "Parametros invalidos. Necessário informar o tipo e o valorLocacao." });
+    res.status(401).json({ message: 'Parametros invalidos. Necessário informar o "tipo" e o "valorLocacao".' });
   }
 
   try {

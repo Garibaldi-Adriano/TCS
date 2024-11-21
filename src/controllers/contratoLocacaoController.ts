@@ -61,10 +61,10 @@ export const getContratoLocacaoById = async (req: Request, res: Response) => {
 
 // Criar um novo contrato de locação
 export const createContratoLocacao = async (req: Request, res: Response) => {
-  const { dataLocacao, dataDevolucao, valorCaucao, valorTotal, status } = req.body;
+  const { dataLocacao, dataDevolucao, valorCaucao, valorTotal, status, veiculoId } = req.body;
 
-  if (!dataLocacao || !dataDevolucao || !valorCaucao || !valorTotal || !status) {
-    res.status(401).json({ message: "Parametros invalidos. Necessário informar: dataLocacao, dataDevolucao, valorCaucao, valorTotal, e o status." });
+  if (!dataLocacao || !dataDevolucao || !valorCaucao || !valorTotal || !status || !veiculoId) {
+    res.status(401).json({ message: "Parametros invalidos. Necessário informar: dataLocacao, dataDevolucao, valorCaucao, valorTotal, status e veiculoId." });
   }
 
   try {
@@ -75,7 +75,15 @@ export const createContratoLocacao = async (req: Request, res: Response) => {
         valorCaucao,
         valorTotal,
         status,
+        veiculos: {
+          connect: {
+            id: veiculoId
+          }
+        }
       },
+      include: {
+        veiculos: true
+      }
     });
     res.status(201).json(contrato);
   } catch (error) {
@@ -90,7 +98,6 @@ export const createContratoLocacao = async (req: Request, res: Response) => {
     }
   }
 };
-
 // Atualizar um contrato de locação
 export const updateContratoLocacao = async (req: Request, res: Response) => {
   const { id } = req.params;

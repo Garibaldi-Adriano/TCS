@@ -28,8 +28,8 @@ model Modelo {
   qtModelo    Int
   marcaId     Int
   categoriaId Int
-  categoria   Categoria @relation(fields: [categoriaId], references: [id])
-  marca       Marca     @relation(fields: [marcaId], references: [id])
+  categoria   Categoria @relation(fields: [categoriaId], references: [id], onDelete: Restrict)
+  marca       Marca     @relation(fields: [marcaId], references: [id], onDelete: Restrict)
   veiculos    Veiculo[]
 }
 
@@ -43,8 +43,8 @@ model Veiculo {
   modeloId      Int
   status        String
   manutencao    Manutencao[]
-  modelo        Modelo            @relation(fields: [modeloId], references: [id])
-  marca         Marca             @relation(fields: [marcaId], references: [id])
+  modelo        Modelo            @relation(fields: [modeloId], references: [id], onDelete: Restrict)
+  marca         Marca             @relation(fields: [marcaId], references: [id], onDelete: Restrict)
   contratos     ContratoLocacao[] @relation("ContratoLocacaoToVeiculo")
 }
 
@@ -54,7 +54,7 @@ model Manutencao {
   dataManutencao  DateTime
   valorManutencao Float
   veiculoId       Int
-  veiculo         Veiculo  @relation(fields: [veiculoId], references: [id])
+  veiculo         Veiculo  @relation(fields: [veiculoId], references: [id], onDelete: Restrict)
 }
 
 model ContratoLocacao {
@@ -64,7 +64,7 @@ model ContratoLocacao {
   valorCaucao   Float
   valorTotal    Float
   status        String
-  Ocorrencia    Ocorrencia[]
+  ocorrencias    Ocorrencia[]
   pagamento     Pagamento[]
   veiculos      Veiculo[]    @relation("ContratoLocacaoToVeiculo")
 }
@@ -75,7 +75,7 @@ model Ocorrencia {
   dataOcorrencia    DateTime
   valorOcorrencia   Float
   contratoId        Int
-  contrato          ContratoLocacao @relation(fields: [contratoId], references: [id])
+  contrato          ContratoLocacao @relation(fields: [contratoId], references: [id], onDelete: Restrict)
 }
 
 model Pagamento {
@@ -84,5 +84,5 @@ model Pagamento {
   valorPago      Float
   formaPagamento String
   contratoId     Int
-  contrato       ContratoLocacao @relation(fields: [contratoId], references: [id])
+  contrato       ContratoLocacao @relation(fields: [contratoId], references: [id], onDelete: Restrict)
 }

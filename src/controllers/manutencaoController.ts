@@ -51,10 +51,10 @@ export const getManutencaoById = async (req: Request, res: Response) => {
 
 // Criar uma nova manutenção
 export const createManutencao = async (req: Request, res: Response) => {
-  const { descricao, dataManutencao, valorManutencao, veiculo } = req.body;
+  const { descricao, dataManutencao, valorManutencao, veiculoId } = req.body;
 
-  if (!descricao || !dataManutencao || !valorManutencao || !veiculo) {
-    res.status(401).json({ message: "Parametros invalidos. Necessário informar a descricao, dataManutencao, valorManutencao e o veiculo." });
+  if (!descricao || !dataManutencao || !valorManutencao || !veiculoId) {
+    res.status(401).json({ message: "Parametros invalidos. Necessário informar a descricao, dataManutencao, valorManutencao e o veiculoId." });
   }
 
   try {
@@ -63,9 +63,7 @@ export const createManutencao = async (req: Request, res: Response) => {
         descricao,
         dataManutencao: new Date(dataManutencao),
         valorManutencao,
-        veiculo: {
-          create: veiculo,
-        },
+        veiculoId
       },
     });
     res.status(201).json(manutencao);
@@ -85,10 +83,11 @@ export const createManutencao = async (req: Request, res: Response) => {
 // Atualizar uma manutenção
 export const updateManutencao = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { descricao, dataManutencao, valorManutencao, veiculo } = req.body;
+  const { descricao, dataManutencao, valorManutencao, veiculoId } = req.body;
 
-  if (!descricao || !dataManutencao || !valorManutencao || !veiculo) {
-    res.status(401).json({ message: "Parametros invalidos. Necessário informar a descricao, dataManutencao, valorManutencao e o veiculo." });
+  if (!descricao || !dataManutencao || !valorManutencao || !veiculoId) {
+    res.status(401).json({ message: "Parametros invalidos. Necessário informar a descricao, dataManutencao, valorManutencao e o veiculoId." });
+    return;
   }
 
   try {
@@ -98,29 +97,7 @@ export const updateManutencao = async (req: Request, res: Response) => {
         descricao,
         dataManutencao: new Date(dataManutencao),
         valorManutencao,
-        veiculo: {
-          upsert: {
-            where: { id: veiculo.id },
-            update: {
-              placa: veiculo.placa,
-              chassi: veiculo.chassi,
-              anoFabricacao: veiculo.anoFabricacao,
-              cor: veiculo.cor,
-              marcaId: veiculo.marcaId,
-              modeloId: veiculo.modeloId,
-              status: veiculo.status,
-            },
-            create: {
-              placa: veiculo.placa,
-              chassi: veiculo.chassi,
-              anoFabricacao: veiculo.anoFabricacao,
-              cor: veiculo.cor,
-              marcaId: veiculo.marcaId,
-              modeloId: veiculo.modeloId,
-              status: veiculo.status,
-            },
-          },
-        },
+        veiculoId
       },
     });
 

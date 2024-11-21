@@ -51,10 +51,10 @@ export const getPagamentoById = async (req: Request, res: Response) => {
 
 // Criar um novo pagamento
 export const createPagamento = async (req: Request, res: Response) => {
-  const { data, valorPago, formaPagamento, contrato } = req.body;
+  const { data, valorPago, formaPagamento, contratoId } = req.body;
 
-  if (!data || !valorPago || !formaPagamento || !contrato) {
-    res.status(401).json({ message: "Parametros invalidos. Necessário informar: data, valorPago, formaPagamento e o contrato." });
+  if (!data || !valorPago || !formaPagamento || !contratoId) {
+    res.status(401).json({ message: "Parametros invalidos. Necessário informar: data, valorPago, formaPagamento e o contratoId." });
   }
 
   try {
@@ -63,9 +63,7 @@ export const createPagamento = async (req: Request, res: Response) => {
         data: new Date(data),
         valorPago,
         formaPagamento,
-        contrato: {
-          create: contrato,
-        },
+        contratoId
       },
     });
     res.status(201).json(pagamento);
@@ -85,10 +83,10 @@ export const createPagamento = async (req: Request, res: Response) => {
 // Atualizar um pagamento
 export const updatePagamento = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { data, valorPago, formaPagamento, contrato } = req.body;
+  const { data, valorPago, formaPagamento, contratoId } = req.body;
 
-  if (!data || !valorPago || !formaPagamento || !contrato) {
-    res.status(401).json({ message: "Parametros invalidos. Necessário informar: data, valorPago, formaPagamento e o contrato." });
+  if (!data || !valorPago || !formaPagamento || !contratoId) {
+    res.status(401).json({ message: "Parametros invalidos. Necessário informar: data, valorPago, formaPagamento e o contratoId." });
   }
 
   try {
@@ -98,25 +96,7 @@ export const updatePagamento = async (req: Request, res: Response) => {
         data: new Date(data),
         valorPago,
         formaPagamento,
-        contrato: {
-          upsert: {
-            where: { id: contrato.id },
-            update: {
-              dataLocacao: contrato.dataLocacao,
-              dataDevolucao: contrato.dataDevolucao,
-              valorCaucao: contrato.valorCaucao,
-              valorTotal: contrato.valorTotal,
-              status: contrato.status,
-            },
-            create: {
-              dataLocacao: contrato.dataLocacao,
-              dataDevolucao: contrato.dataDevolucao,
-              valorCaucao: contrato.valorCaucao,
-              valorTotal: contrato.valorTotal,
-              status: contrato.status,
-            },
-          },
-        },
+        contratoId
       },
     });
 

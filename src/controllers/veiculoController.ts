@@ -62,7 +62,7 @@ export const createVeiculo = async (req: Request, res: Response) => {
   const { placa, chassi, anoFabricacao, cor, marcaId, modeloId, status } = req.body;
 
   if (!placa || !chassi || !anoFabricacao || !cor || !marcaId || !modeloId || !status ) {
-    res.status(401).json({ message: "Parametros invalidos. Necessário informar: placa, chassi, anoFabricacao, cor, marca, modelo e o status." });
+    res.status(401).json({ message: "Parametros invalidos. Necessário informar: placa, chassi, anoFabricacao, cor, marcaId, modeloId e o status." });
   }
 
   try {
@@ -97,7 +97,7 @@ export const updateVeiculo = async (req: Request, res: Response) => {
   const { placa, chassi, anoFabricacao, cor, marcaId, modeloId, status } = req.body;
 
   if (!placa || !chassi || !anoFabricacao || !cor || !marcaId || !modeloId || !status) {
-    res.status(401).json({ message: "Parametros invalidos. Necessário informar: placa, chassi, anoFabricacao, cor, marca, modelo e o status." });
+    res.status(401).json({ message: "Parametros invalidos. Necessário informar: placa, chassi, anoFabricacao, cor, marcaId, modeloId e o status." });
   }
 
   try {
