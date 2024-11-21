@@ -45,9 +45,29 @@ model Veiculo {
   manutencao    Manutencao[]
   modelo        Modelo            @relation(fields: [modeloId], references: [id], onDelete: Restrict)
   marca         Marca             @relation(fields: [marcaId], references: [id], onDelete: Restrict)
-  contratos     ContratoLocacao[] @relation("ContratoLocacaoToVeiculo")
+  contratos     VeiculoContrato[]
 }
 
+model ContratoLocacao {
+  id            Int               @id @default(autoincrement())
+  dataLocacao   DateTime
+  dataDevolucao DateTime
+  valorCaucao   Float
+  valorTotal    Float
+  status        String
+  ocorrencias   Ocorrencia[]
+  pagamento     Pagamento[]
+  veiculos      VeiculoContrato[]
+}
+
+model VeiculoContrato {
+  veiculo       Veiculo          @relation(fields: [veiculoId], references: [id])
+  veiculoId     Int
+  contrato      ContratoLocacao  @relation(fields: [contratoId], references: [id])
+  contratoId    Int
+
+  @@id([veiculoId, contratoId])
+}
 model Manutencao {
   id              Int      @id @default(autoincrement())
   descricao       String
@@ -55,18 +75,6 @@ model Manutencao {
   valorManutencao Float
   veiculoId       Int
   veiculo         Veiculo  @relation(fields: [veiculoId], references: [id], onDelete: Restrict)
-}
-
-model ContratoLocacao {
-  id            Int          @id @default(autoincrement())
-  dataLocacao   DateTime
-  dataDevolucao DateTime
-  valorCaucao   Float
-  valorTotal    Float
-  status        String
-  ocorrencias    Ocorrencia[]
-  pagamento     Pagamento[]
-  veiculos      Veiculo[]    @relation("ContratoLocacaoToVeiculo")
 }
 
 model Ocorrencia {
