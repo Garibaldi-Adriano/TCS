@@ -61,7 +61,7 @@ export const getVeiculoById = async (req: Request, res: Response) => {
 export const createVeiculo = async (req: Request, res: Response) => {
   const { placa, chassi, anoFabricacao, cor, marcaId, modeloId, status } = req.body;
 
-  if (!placa || !chassi || !anoFabricacao || !cor || !marcaId || !modeloId || !status ) {
+  if (!placa || !chassi || !anoFabricacao || !cor || !marcaId || !modeloId || !status) {
     res.status(401).json({ message: "Parametros invalidos. Necessário informar: placa, chassi, anoFabricacao, cor, marcaId, modeloId e o status." });
   }
 
@@ -70,7 +70,7 @@ export const createVeiculo = async (req: Request, res: Response) => {
       data: {
         placa,
         chassi,
-        anoFabricacao: new Date(anoFabricacao),
+        anoFabricacao,
         cor,
         marcaId,
         modeloId,
@@ -106,7 +106,7 @@ export const updateVeiculo = async (req: Request, res: Response) => {
       data: {
         placa,
         chassi,
-        anoFabricacao: new Date(anoFabricacao),
+        anoFabricacao,
         cor,
         marcaId,
         modeloId,

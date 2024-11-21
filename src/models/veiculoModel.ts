@@ -1,19 +1,19 @@
-import { Marca } from "./marcaModel"
-import { Modelo } from "./modeloModel"
-import { manutencao, Manutencao } from "./manutencaoModel"
+import { Marca } from "./marcaModel";
+import { Modelo } from "./modeloModel";
+import { manutencao, Manutencao } from "./manutencaoModel";
 
 interface Veiculo {
-  id               : number
-  placa            : String
-  chassi           : String
-  anoFabricacao    : Date
-  cor              : String
-  marca            : Marca
-  modelo           : Modelo             
-  status           : String
-  manutencao       : Manutencao[]
+  id: number;
+  placa: String;
+  chassi: String;
+  anoFabricacao: number;
+  cor: String;
+  marca: Marca;
+  modelo: Modelo;
+  status: String;
+  manutencao: Manutencao[];
 }
 
-let veiculo : Veiculo [] = []
+let veiculo: Veiculo[] = [];
 
-export {Veiculo, veiculo}
+export { Veiculo, veiculo };

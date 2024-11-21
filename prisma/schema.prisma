@@ -24,7 +24,7 @@ model Marca {
 model Modelo {
   id          Int       @id @default(autoincrement())
   nome        String
-  anoModelo   DateTime
+  anoModelo   Int
   qtModelo    Int
   marcaId     Int
   categoriaId Int
@@ -37,7 +37,7 @@ model Veiculo {
   id            Int               @id @default(autoincrement())
   placa         String            @unique
   chassi        String            @unique
-  anoFabricacao DateTime
+  anoFabricacao Int
   cor           String
   marcaId       Int
   modeloId      Int

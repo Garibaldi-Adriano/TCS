@@ -72,7 +72,7 @@ export const createModelo = async (req: Request, res: Response) => {
     const modelo = await prisma.modelo.create({
       data: {
         nome,
-        anoModelo: new Date(anoModelo),
+        anoModelo,
         qtModelo,
         marcaId,
         categoriaId,
@@ -106,7 +106,7 @@ export const updateModelo = async (req: Request, res: Response) => {
       where: { id: Number(id) },
       data: {
         nome,
-        anoModelo: new Date(anoModelo),
+        anoModelo,
         qtModelo,
         marcaId,
         categoriaId,
