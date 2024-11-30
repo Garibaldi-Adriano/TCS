@@ -58,6 +58,7 @@ model ContratoLocacao {
   ocorrencias   Ocorrencia[]
   pagamento     Pagamento[]
   veiculos      VeiculoContrato[]
+  clientes      ClienteContrato[]
 }
 
 model VeiculoContrato {
@@ -93,4 +94,30 @@ model Pagamento {
   formaPagamento String
   contratoId     Int
   contrato       ContratoLocacao @relation(fields: [contratoId], references: [id], onDelete: Restrict)
+}
+
+model Cliente {
+  id            Int      @id @default(autoincrement())
+  nomeCompleto  String
+  cpf           String   @unique
+  email         String   @unique
+  telefone      String
+  cep           String
+  endereco      String
+  numero        String
+  complemento   String?
+  bairro        String
+  cidade        String
+  estado        String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  contratos     ClienteContrato[]
+}
+
+model ClienteContrato {
+  cliente   Cliente          @relation(fields: [clienteId], references: [id])
+  clienteId Int
+  contrato  ContratoLocacao  @relation(fields: [contratoId], references: [id])
+  contratoId Int
+  @@id([clienteId, contratoId])
 }

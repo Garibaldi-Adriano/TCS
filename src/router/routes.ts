@@ -1,4 +1,5 @@
-import { Router } from "express";
+import { Request, Response, Router } from "express";
+import { RequestHandler } from "express";
 import { getAllMarcas, getMarcaById, createMarca, updateMarca, deleteMarca } from "../controllers/marcaController";
 import { getAllModelos, getModeloById, createModelo, updateModelo, deleteModelo } from "../controllers/modeloController";
 import { getAllCategorias, getCategoriaById, createCategoria, updateCategoria, deleteCategoria } from "../controllers/categoriaController";
@@ -13,6 +14,13 @@ import {
   deleteContratoLocacao,
 } from "../controllers/contratoLocacaoController";
 import { getAllPagamentos, getPagamentoById, createPagamento, updatePagamento, deletePagamento } from "../controllers/pagamentoController";
+import {
+  getAllClientes,
+  getClienteById,
+  createCliente,
+  updateCliente,
+  deleteCliente,
+} from "../controllers/clientController";
 
 const router = Router();
 
@@ -71,5 +79,14 @@ router.get("/pagamentos", getAllPagamentos);
 router.get("/pagamentos/:id", getPagamentoById);
 router.put("/pagamentos/:id", updatePagamento);
 router.delete("/pagamentos/:id", deletePagamento);
+
+
+//***** CLIENTE ******** */
+router.post("/clientes", createCliente as RequestHandler);
+router.get("/clientes", getAllClientes as RequestHandler);
+router.get("/clientes/:id", getClienteById as RequestHandler);
+router.put("/clientes/:id", updateCliente as RequestHandler);
+router.delete("/clientes/:id", deleteCliente as RequestHandler);
+
 
 export default router;

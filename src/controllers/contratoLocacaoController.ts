@@ -74,12 +74,7 @@ export const createContratoLocacao = async (req: Request, res: Response) => {
         dataDevolucao: new Date(dataDevolucao),
         valorCaucao,
         valorTotal,
-        status,
-        veiculos: {
-          connect: {
-            id: veiculoId
-          }
-        }
+        status
       },
       include: {
         veiculos: true
@@ -116,31 +111,6 @@ export const updateContratoLocacao = async (req: Request, res: Response) => {
         valorCaucao,
         valorTotal,
         status,
-        veiculos: {
-          upsert: veiculo.map((veiculo: any) => ({
-            where: { id: veiculo.id },
-            update: {
-              placa: veiculo.placa,
-              chassi: veiculo.chassi,
-              anoFabricacao: veiculo.anoFabricacao,
-              cor: veiculo.cor,
-              marca: veiculo.marca,
-              modelo: veiculo.modelo,
-              status: veiculo.status,
-              manutencao: veiculo.manutencao,
-            },
-            create: {
-              placa: veiculo.placa,
-              chassi: veiculo.chassi,
-              anoFabricacao: veiculo.anoFabricacao,
-              cor: veiculo.cor,
-              marca: veiculo.marca,
-              modelo: veiculo.modelo,
-              status: veiculo.status,
-              manutencao: veiculo.manutencao,
-            },
-          })),
-        },
         ocorrencias: {
           upsert: ocorrencia.map((ocorrencia: any) => ({
             where: { id: ocorrencia.id },
